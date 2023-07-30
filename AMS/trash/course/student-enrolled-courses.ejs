@@ -1,0 +1,38 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Course Name</th>
+      <th>Course Teacher</th>
+      <th>Enroll</th>
+    </tr>
+  </thead>
+  <tbody>
+
+<% courses.forEach(course=> { %>
+    <tr>
+      <td> <%= course.course_name %> </td>
+      <td>Null</td>
+      <td><a href="/enroll?course_id=<%= course._id %>&&std_id=<%= std_Id %>"> <%= course.course_name %> </a></td>
+      <td><% course.enrolled_Students.forEach(student=> { %>
+          <%= "Enrolled"  %>
+     <% }) %>
+
+     <% if (course.enrolled_Students.length==0) { %>
+        <%= "Not Enrolled"  %>
+     <% } %>
+      </td>
+    </tr>
+    
+<% }); %>
+
+  </tbody>
+</table>
+
+<%= name %>
+
+ <%= student_email %>
+<% if (courses.length) { %>
+<%= courses.length %>
+<% } %>
+
+

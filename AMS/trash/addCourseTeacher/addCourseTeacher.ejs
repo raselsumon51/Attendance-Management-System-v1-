@@ -1,0 +1,26 @@
+<head>
+    <style>
+         a{
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+    }
+    a:hover{
+        color: rgb(0, 0, 0);
+    }
+    </style>
+</head>
+
+    <div class="container">
+        <h3>Add Teacher To a Course</h3>
+        <form action="/teacher/create" method="post">
+            <div class="mb-3 mt-3">
+                <label for="teacher_email">Teacher email</label>
+                <input type="email" class="form-control" id="teacher_email" placeholder="Enter email" name="teacher_email">
+            </div>
+            <div class="mb-3">
+                <label for="teacher_pass">Password :</label>
+                <input type="text" class="form-control" id="teacher_pass" placeholder="Enter Password" name="teacher_pass">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+    </div>

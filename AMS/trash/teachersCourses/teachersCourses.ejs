@@ -1,0 +1,29 @@
+
+<div class="container d-flex justify-content-center w-50 py-5">
+  <div class="row">
+    
+    <form action="/course/add/teacher" method="post">
+        <h3 class="mb-4">Add Course Teacher </h3>
+      <label for="courses" class="fs-5 me-2 mb-2">Choose a course:</label>
+      <select name="course_id">
+        <% courses.forEach(course=> { %>
+        <option value=<%=course._id%>>
+          <%= course.course_name %>
+        </option>
+        <% }); %>
+      </select>
+      <br>
+      <label for="teachers" class="fs-5 me-2 mb-3">Choose a teacher:</label>
+      <select name="teacher_id">
+        <% teachers.forEach(teacher=> { %>
+        <option value=<%= teacher._id %>>
+          <%= teacher.email %>
+        </option>
+        <% }); %>
+      </select>
+      <br>
+      <button class="btn btn-dark" type="submit">Add</button>
+    </form>
+
+  </div>
+</div>

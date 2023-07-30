@@ -1,0 +1,42 @@
+<style>
+  .custom-card {
+    background: hsla(222, 44%, 13%, 1) !important;
+    border: 1px solid hsla(216, 33%, 20%, 1);
+}
+</style>
+
+<div class="container custom-card">
+  <div class="row justify-content-center">
+    <div class="col-md-8" style="padding: 80px  ;" >
+      <div class=" p-4">
+        <form action="/admin-dashboard/assign-course-teacher" method="post">
+          <h4 class="mb-4 text-center">Add Course Teacher</h4>
+
+          <div class="mb-3">
+            <label for="courses" class="form-label">Choose a course:</label>
+            <select name="course_id" class="form-select">
+              <% courses.forEach(course => { %>
+              <option value=<%= course._id %>>
+                <%= course.name %>
+              </option>
+              <% }); %>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="teachers" class="form-label">Choose a teacher:</label>
+            <select name="teacher_id" class="form-select">
+              <% teachers.forEach(teacher => { %>
+              <option value=<%= teacher._id %>>
+                <%= teacher.email %>
+              </option>
+              <% }); %>
+            </select>
+          </div>
+
+          <div class="text-center "><button class=" btn btn-info px-4 text-white" type="submit">Add</button></div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

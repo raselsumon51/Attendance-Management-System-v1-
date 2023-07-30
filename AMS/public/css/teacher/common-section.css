@@ -1,0 +1,7 @@
+.section-common {
+    background-color: hsla(222, 44%, 13%, 1);
+    color: aliceblue;
+    border: 1px solid hsla(216, 33%, 20%, 1);
+    padding-left: 150px;
+    padding-right: 150px;
+}

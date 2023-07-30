@@ -1,0 +1,68 @@
+<style>
+    .custom-card {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .success {
+        width: 300px;
+    }
+</style>
+<div class="container">
+    <div class="row justify-content-center custom-card">
+        <div class="col-md-8">
+            <div class="">
+
+                <% if (success) { %>
+
+                    <div class="bg-white py-2" id="success">
+                        <div class="text-center ">
+                            <span>Teacher has been successfully added!</span>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <% } %>
+                        <h4 class="text-center mb-4 mt-4">Add Teacher using Form</h4>
+                        <form action="/admin-dashboard/add-teacher" method="post">
+                            <div class="">
+                                <label for="teacher_email" class="form-label">Teacher Email</label>
+                                <input type="email" class="form-control" id="teacher_email" placeholder="Enter email"
+                                    name="teacher_email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="teacher_pass" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="teacher_pass"
+                                    placeholder="Enter Password" name="teacher_pass" required>
+                            </div>
+                            <div class="d-flex justify-content-center gap-2 text-center ">
+                                <button type="submit" class="btn btn-primary btn text-center w-25">Add</button>
+                            </div>
+                        </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const closeButton = document.querySelector(".btn-close");
+    const successAlert = document.getElementById("success");
+
+    function closeSuccessMessage() {
+        let opacity = 1;
+
+        const animationInterval = setInterval(() => {
+            opacity -= 0.05; // Decrease opacity in small steps
+            successAlert.style.opacity = opacity;
+
+            if (opacity <= 0) {
+                successAlert.style.display = "none";
+                clearInterval(animationInterval); // Stop the animation
+            }
+        }, 30); // Adjust the duration as needed (20ms = 50fps)
+    }
+
+    closeButton.addEventListener("click", () => {
+        closeSuccessMessage();
+    });
+</script>

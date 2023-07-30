@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-11 section-common section-common-padding">
+      <div >
+        <div >
+          <h4 class="text-center">Update Info</h4>
+        </div>
+        <div class="card-body">
+          <form action="/teacher/<%= teacher._id %>/update" method="POST">
+            <div class="form-group">
+              <label for="name">Email:</label>
+              <input type="text" class="form-control" name="name" value="<%= teacher.email %>">
+            </div>
+            <div class="text-center pt-3">
+              <button type="submit" class="btn btn-primary ">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

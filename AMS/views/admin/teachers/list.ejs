@@ -1,0 +1,26 @@
+<style>
+  th,td{
+    padding-left: 40px!important;
+  }
+</style>
+<div class="container " style="padding: 30px 250px 0px 250px;">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h4 class="text-center mb-3" >Teachers List</h4>
+      <table class="table  table-bordered " style="color: rgba(130, 132, 135, 0.964);">
+        <thead>
+          <tr>
+            <th>Teacher Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% teachers.forEach(teacher => { %>
+          <tr>
+            <td><%= teacher.email %></td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

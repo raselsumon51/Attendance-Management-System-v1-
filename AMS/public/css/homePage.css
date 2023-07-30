@@ -1,0 +1,67 @@
+.logo {
+    text-align: right;
+    padding-top: 15px;
+}
+.logo img {
+    height: 93px;
+}
+.h_text h1 {
+    line-height: 86px;
+    font-family: initial;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 15px;
+}
+.container{
+    background-color: white;
+}
+
+/* <!---slider---> */
+
+.slider{
+    background: url(/images/library.jpg) no-repeat center center;
+    background-size: cover;
+    padding: 180px 0;
+    color: snow;
+    position: relative;
+    z-index: 9;
+}
+.slider ::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgb(34 33 32 / 4%);
+    z-index: -1;
+}
+.slider h2 {
+    font-size: 45px;
+    margin-bottom: 23px;
+}
+.slider h3{
+    font-size: 30px;
+    font-weight: 600;
+}
+.btnn {
+    padding: 10px 30px;
+    background-color: #FF8419;
+    display: inline-block;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0px 12px;
+    transition: .3s;
+}
+.btnn:hover{
+    background-color: black;
+    color: white;
+}
+.footer.text-center {
+    font-weight: 500;
+}
+.div a {
+    text-decoration: none;
+    border-radius: 5px;
+}

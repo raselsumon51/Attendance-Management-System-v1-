@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-11  section-common py-5">
+      <h4 class=" text-center">Attendance</h4>
+      <p>Total class <%= total_class %>
+      </p>
+      <table class="table table-bordered text-white">
+        <thead>
+          <tr>
+            <th class="text-center">Student Name</th>
+            <th class="text-center">Attendance Count</th>
+            <th class="text-center">Attendance Percentage</th>
+            <th class="text-center">Marks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% results.forEach(function(result) { %>
+          <tr>
+            <td class="text-center">
+              <%= result.name %>
+            </td>
+            <td class="text-center">
+              <%= result.count %>
+            </td>
+            <td class="text-center">
+              <% if (isNaN(result.count) || isNaN(total_class) || total_class===0) { %>
+              0
+              <% } else { %>
+              <%= ((result.count / total_class) * 100).toFixed(2) %> %
+              <% } %>
+            </td>
+            <td class="text-center">
+              <%= calculateGrade((result.count / total_class) * 100) %>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <% function calculateGrade(percentage) { %>
+      <% if (isNaN(percentage)) { %>
+      0
+      <% } else if (percentage>= 95) { %>
+      <%= latestMark[0].marks_95_100 %>
+      <% } else if (percentage>= 90) { %>
+      <%= latestMark[0].marks_90_94 %>
+      <% } else if (percentage>= 85) { %>
+      <%= latestMark[0].marks_85_89 %>
+      <% } else if (percentage>= 80) { %>
+      <%= latestMark[0].marks_80_84 %>
+      <% } else if (percentage>= 75) { %>
+      <%= latestMark[0].marks_75_79 %>
+      <% } else if (percentage>= 70) { %>
+      <%= latestMark[0].marks_70_74 %>
+      <% } else if (percentage>= 65) { %>
+      <%= latestMark[0].marks_65_69 %>
+      <% } else if (percentage>= 60) { %>
+      <%= latestMark[0].marks_60_64 %>
+      <% } else { %>
+      0
+      <% } %>
+      <% } %>
+
+    </div>
+  </div>
+</div>

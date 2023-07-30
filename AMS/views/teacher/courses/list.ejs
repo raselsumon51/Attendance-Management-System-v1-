@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row row justify-content-center">
+        <div class="col-md-11 section-common section-common-padding ">
+            <h4 class="text-center mb-4">Courses</h4>
+            <table class="table table-bordered text-white">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Course Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% courses.forEach(course=> { %>
+                        <tr>
+                            <td>
+                                <%= course.name %>
+                            </td>
+                            <td>
+                                <%= course.code %>
+                            </td>
+                            
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

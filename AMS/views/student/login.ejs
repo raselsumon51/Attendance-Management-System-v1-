@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,900&display=swap"
+        rel="styleshee">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="/css/studentLogin.css"> -->
+    <style>
+        /* body {
+            overflow: hidden;
+        } */
+        .container {
+            height: 90vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+       .login-form {
+            width: 400px;
+             height: 400px;
+        }
+        
+    </style>
+</head>
+
+<body style="background-color: #ffffff;">
+    <div class="container-fluid" style="background-color: #276b93; ">
+        <div class="row px-5">
+            <div class="col-md-3 text-lg-start" style="background-color: #276b93; ">
+                <h5 class="py-md-3 text-white">Teacher Dashboard</h5>
+            </div>
+            <div class="col-md-9" style="background-color: #276b93; ">
+                <h5 class="py-md-3 text-lg-right text-white">Attendance Management System 2019</h5>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row login-form">
+            <div class="col-lg-12  shadow-lg mb-5 bg-white ">
+                <h4 class="mb-3 text-center">Login</h4>
+                <hr>
+                <form action="/students-dashboard/login" method="post" class="form">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="pwd" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
+                    </div>
+                    <br>
+                    <div class="btnn">
+                        <div class="row">                       
+                                <button type="submit" class="btn btn-primary btn-lg btn-block mb-2">Log in</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="my-3 text-center">
+                    <p>Need an account? <a href="/student/registration" class="text-decoration-none ms-3">Signup</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12" style="position: absolute; bottom: 0px; background-color: #1d333d; height: 40px;">
+                <footer class="w-100 d-flex justify-content-center">
+                    <p class="text-white m-0 py-2">Attendance Management System &copy;2023</p>
+                </footer>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

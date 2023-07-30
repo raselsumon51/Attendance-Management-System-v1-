@@ -1,0 +1,48 @@
+<div class="container ">
+    <div class="row  d-flex justify-content-center">
+        <div class="col-md-11 section-common section-common-padding">
+            <h4 class="mb-4 text-center">Add Student</h4>
+            <% if (message) { %>
+                <p class="bg-primary">
+                    <%= message %>
+                </p>
+                <% } %>
+                    <form action="/students-dashboard/store-form-data" method="post" class="form">
+                        <div class="mb-3">
+                            <label for="student_id" class="form-label">Student ID:</label>
+                            <input required type="number" class="form-control" id="student_id"
+                                placeholder="Enter student ID" name="student_id">
+                        </div>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name:</label>
+                            <input required type="text" class="form-control" id="name" placeholder="Enter name"
+                                name="name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email:</label>
+                            <input required type="email" class="form-control" id="email" placeholder="Enter email"
+                                name="email">
+                        </div>
+                        <div class="mb-0">
+                            <!-- <label for="password" class="form-label">Password:</label> -->
+                            <input type="hidden" class="form-control" id="password" placeholder="Enter password"
+                                name="password" value="123456">
+                        </div>
+                        <div class="mb-0">
+                            <!-- <label for="password" class="form-label">Password:</label> -->
+                            <input type="hidden" class="form-control" id="course_id" placeholder="Enter password"
+                                name="course_id" value="<%= course_id %>">
+                        </div>
+                        <br>
+                    
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        </div>
+                        <!-- <div class="login-student">
+                        <p class="text-center">Already have an account? <a href="/student/login">login</a></p>
+                    </div> -->
+                    </form>
+                   
+        </div>
+    </div>
+</div>

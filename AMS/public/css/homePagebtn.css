@@ -1,0 +1,10 @@
+a.right.pull-right {
+    text-decoration: none;
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 11px 75px;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 18px;
+}

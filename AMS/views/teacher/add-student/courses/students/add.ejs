@@ -1,0 +1,25 @@
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-11 section-common section-common-padding">
+            <div class="p-4">
+                <h4 class="text-center mb-4">Upload Excel File</h4>
+                <form action="/students-dashboard/upload" method="post" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="course_file" class="form-label">Upload Excel File</label>
+                        <input type="file" class="form-control" id="student_file" name="student_file"
+                            accept=".xlsx,.xls" required>
+                    </div>
+                    <div class="mb-0">
+                        <!-- <label for="password" class="form-label">Password:</label> -->
+                        <input type="hidden" class="form-control" id="course_id" placeholder="Enter password"
+                            name="course_id" value="<%= course_id %>">
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-primary w-25">Upload</button>
+                    </div>
+                </form>
+                <p class="text-center pt-3"><a href="/students-dashboard/add-manually/<%= course_id %>" style="text-decoration: none;">Add Student
+                        manually?</a></p>
+            </div>
+        </div>
+    </div>

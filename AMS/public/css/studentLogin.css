@@ -1,0 +1,51 @@
+body{
+    background: lightgray;
+}
+h3.mb-4.text-center {
+    font-family: revert;
+}
+label {
+    font-weight: 500;
+    font-size: 18px;
+}
+
+button.btn.btn-primary.btn-lg.btn-block {
+    font-size: 20px;
+    font-weight: 500;
+}
+.login_style{
+    border-radius: 15px;
+}
+h4.text-center {
+    padding: 19px 8px;
+    border-radius: 6px;
+    color: black;
+}
+a.right.pull-right {
+    text-decoration: none;
+    display: inline-block;
+    background: #007bff;
+    color: white;
+    padding: 11px 75px;
+    font-weight: 500;
+    border-radius: 4px;
+    font-size: 18px;
+}
+
+ body,
+ html {
+     height: 100%;
+     width: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+ }
+
+ .container {
+     max-width: 100%;
+ }
+
+ .login_style {
+     margin: auto;
+ }

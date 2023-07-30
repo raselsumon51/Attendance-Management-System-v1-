@@ -1,0 +1,43 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <h4 class="text-center mb-4">Add Teacher using Form</h4>
+        <form action="/teacher/add" method="post">
+          <div class="mb-3">
+            <label for="teacher_email" class="form-label">Teacher Email</label>
+            <input type="email" class="form-control" id="teacher_email" placeholder="Enter email" name="teacher_email"
+              required>
+          </div>
+          <div class="mb-3">
+            <label for="teacher_pass" class="form-label">Password</label>
+            <input type="password" class="form-control" id="teacher_pass" placeholder="Enter Password"
+              name="teacher_pass" required>
+          </div>
+          <div class="d-flex justify-content-center gap-2 text-center">
+            <button type="submit" class="btn btn-primary btn text-center w-25">Add</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<h4 class="text-center py-2">Or</h4>
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-sm p-4">
+        <h4 class="text-center mb-4">Upload Excel File  </h4>
+        <form action="/teacher/upload" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="teacher_file" class="form-label">Upload Excel File</label>
+            <input type="file" class="form-control" id="teacher_file" name="teacher_file" accept=".xlsx,.xls" required>
+          </div>
+          <div class="d-flex justify-content-center gap-2">
+            <button type="submit" class="btn btn-primary btn w-25">Upload</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
