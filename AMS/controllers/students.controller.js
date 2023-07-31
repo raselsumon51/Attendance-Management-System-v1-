@@ -199,7 +199,6 @@ exports.postRegistrationData = async (req, res) => {
 };
 
 exports.saveEnrollData = async (req, res) => {
-
     try {
         const { student_id, course_id } = req.query;
         const existingEnrollment = await Enrollment.findOne({ student_id: student_id, course_id: course_id });
@@ -210,7 +209,7 @@ exports.saveEnrollData = async (req, res) => {
             const enrollment = new Enrollment({ student_id, course_id });
             await enrollment.save();
 
-            res.redirect('/course/all');
+            res.redirect('/students-dashboard/courses');
         }
 
     } catch (error) {
@@ -220,7 +219,9 @@ exports.saveEnrollData = async (req, res) => {
 
 exports.editStudent = async (req, res) => {
     try {
-        const student = await Student1.findOne({ _id: req.params.id });
+        const student = await Student1.find({ _id: req.session.student_id });
+        // console.log("hi")
+        // console.log(student[0].student_id);
         if (!student) {
             res.status(404).send('Student not found');
             return;

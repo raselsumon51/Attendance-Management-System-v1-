@@ -9,7 +9,7 @@
           <tr>
             <th>Course Name</th>
             <th>Course Code</th>
-            <th>Teacher</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -20,11 +20,10 @@
             <td>
               <form action="/enroll" method="post">
                 <input type="hidden" name="courseId" value="<%= course._id %>">
-                <!-- <button type="submit" class="btn btn-primary">Enroll</button> -->
                 <% if (enrolledCourseIds.includes(course._id.toString())) { %>
                 Enrolled
                 <% } else { %>
-                <a href="/student/enroll?student_id=<%= student_id %>&course_id=<%= course._id %>" class="btn btn-primary">Enroll</a>
+                <a href="/students-dashboard/enroll?student_id=<%= student_id %>&course_id=<%= course._id %>" class="btn btn-primary">Enroll</a>
                 <% } %>
               </form>
             </td>

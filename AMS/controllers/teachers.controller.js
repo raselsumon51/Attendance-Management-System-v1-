@@ -2,10 +2,8 @@ const mongoose = require('mongoose');
 const express = require('express');
 const app = express();
 const Teacher1 = require('../models/Teacher1.model');
-const xlsx = require('xlsx');
 const fileUpload = require('express-fileupload');
 app.use(fileUpload());
-const path = require('path');
 const { Course1 } = require('../models/Course1.model');
 const { Attendance } = require('../models/Attendance.model');
 const Student1 = require('../models/Student1.model');
@@ -16,12 +14,10 @@ const Mark = require('../models/Mark.model');
 exports.updateTeacher = async (req, res) => {
     try {
         const teacher = await Teacher1.findOne({ _id: req.session.teacher_id });
-        console.log(teacher)
         if (!teacher) {
             res.status(404).send('Teacher not found');
             return;
         }
-        // Render the update form with the student data
         res.render('teacher/profile/update', { teacher, page: "teacher-update", teacher_id: req.session.teacher_id, layout: './layouts/teacher-dashboard-layout' });
     } catch (err) {
         console.error(err);
@@ -38,7 +34,6 @@ exports.saveUpdatedTeacher = async (req, res) => {
         }
         teacher.name = req.body.name;
         await teacher.save();
-        // Redirect to the student detail page
         res.send("change saved");
     } catch (err) {
         console.error(err);
