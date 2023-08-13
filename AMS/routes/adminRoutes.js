@@ -7,7 +7,7 @@ const adminAuthMiddleware = require('../middlewares/adminAuthMiddleware');
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
-const { getUser, getAdminDashboard, logoutAdmin, getAdminLoginForm, loginAdmin, createTeacher, createNewTeacher, uploadTeacherEmails, allTeachers, getCoursesAndTeachers, addCourseTeacher, addTeacher, createCourse, createNewCourse, uploadCourses, getUploadCourses, addTeacherManually, addCourseManually } = require('../controllers/adminController');
+const { getUser, getAdminDashboard, logoutAdmin, getAdminLoginForm, loginAdmin, createTeacher, createNewTeacher, uploadTeacherEmails, allTeachers, getCoursesAndTeachers, addCourseTeacher, addTeacher, createCourse, createNewCourse, uploadCourses, getUploadCourses, addTeacherManually, addCourseManually, addCourseManually1, addCourseManual } = require('../controllers/adminController');
 // router.get('/', getUser);
 
 router.get('/', getAdminDashboard);
@@ -27,11 +27,13 @@ router.get('/teachers-assigned-courses', adminAuthMiddleware, getCoursesAndTeach
 
 router.get('/assign-course-teacher', adminAuthMiddleware, addCourseTeacher);
 router.post('/assign-course-teacher', adminAuthMiddleware, addTeacher);
+
+// router.get('/add-teachers-manually', adminAuthMiddleware, addTeacherManually);
+
+
+// Add courses Manually
+router.get('/add-courses-manually', adminAuthMiddleware, addCourseManual);
 router.post('/add-course', adminAuthMiddleware, createNewCourse);
-
-
-router.get('/add-teachers-manually', adminAuthMiddleware, addTeacherManually);
-router.get('/add-courses-manually', adminAuthMiddleware, addCourseManually);
 
 
 //upload courses by excel file

@@ -244,8 +244,14 @@ exports.createNewCourse = async (req, res) => {
 
     course1.save()
         .then(course => {
-            console.log(`Saved course: ${course}`);
-            res.send("Course Created");
+            res.render('admin/courses/add_manually', {
+            layout: './layouts/admin-dashboard-layout',
+            message: "",
+            stylesheet: "",
+            success:true
+         });
+            // console.log(`Saved course: ${course}`);
+            // res.send("Course Created");
         })
         .catch(err => {
             console.error(err);
@@ -304,11 +310,24 @@ exports.getUploadCourses = (req, res) => {
     });
 };
 
-exports.addCourseManually = (req, res) => {
+// exports.addCourseManually1 = (req, res) => {
+//     console.log("jjjj")
+//     res.render('admin/courses/add_manually', {
+//         value:"hhhhh",
+//         layout: './layouts/admin-dashboard-layout',
+//         message: "",
+//         stylesheet: "",
+//     });
+// };
+
+exports.addCourseManual = (req, res) => {
+    // const success = true;
     res.render('admin/courses/add_manually', {
         layout: './layouts/admin-dashboard-layout',
         message: "",
-        stylesheet: ""
+        stylesheet: "",
+        success: false,
+        value:'jjjjjjjjj'
     });
 };
 
