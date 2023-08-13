@@ -87,7 +87,6 @@ exports.setMarks = async (req, res) => {
         const marks = new Marks(marksData);
 
         await marks.save();
-
         res.send('Marks saved successfully');
     } catch (err) {
         console.error('Error saving marks:', err);

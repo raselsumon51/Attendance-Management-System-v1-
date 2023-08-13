@@ -24,7 +24,10 @@ router.post('/add', postCourseID);
 router.post('/store-form-data', store_form_info);
 router.get('/add-manually/:course_id', addStudentManually);
 
+//student registration
+router.get('/registration', getRegistrationPage)
 router.post('/register', postRegistrationData)
+
 router.get('/enroll', saveEnrollData)
 router.get('/students/:id/edit', studentAuthMiddleware, editStudent)
 router.post('/:id/update', studentAuthMiddleware, updateStudent)

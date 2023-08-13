@@ -271,6 +271,7 @@ exports.uploadCourses = async (req, res) => {
 
             for (const course of courses) {
                 const existingCourse = await Course1.find({ code: course.course_code });
+                console.log(`Existing courses ${existingCourse}`)
                 if (existingCourse.length < 1) {
                     const newCourse = new Course1({ name: course.course_name, code: course.course_code }); // Set the default password value
                     const savedCourse = await newCourse.save();

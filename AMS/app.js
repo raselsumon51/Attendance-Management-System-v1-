@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const expressLayouts = require('express-ejs-layouts');
 const fileUpload = require('express-fileupload');
+require('dotenv').config();
 
 const adminRoutes = require('./routes/adminRoutes');
 const courseRoutes = require('./routes/courseRoutes');
@@ -14,6 +15,7 @@ const attendanceRoutes = require('./routes/attendance');
 
 const app = express();
 const port = 3001;
+const DATABASE_URL = process.env.DATABASE_URL;
 
 // Middleware and configurations
 app.use(expressLayouts);
@@ -30,7 +32,8 @@ app.set('layout', 'layouts/layout');
 
 // Session configuration
 const store = new MongoStore({
-    url: 'mongodb://127.0.0.1:27017/attendance',
+    // url: 'mongodb://127.0.0.1:27017/attendance',
+    url: "mongodb+srv://raselsumon51:enPAmPa3oRxTsOCW@cluster0.nngte0p.mongodb.net/attendance?retryWrites=true&w=majority",
     ttl: 604800 // 7 days
 });
 
@@ -68,7 +71,9 @@ app.get('/', function (req, res) {
 
 // Database connection
 mongoose.set('strictQuery', false);
-mongoose.connect('mongodb://127.0.0.1:27017/attendance');
+// mongoose.connect('mongodb://127.0.0.1:27017/attendance');
+mongoose.connect("mongodb+srv://raselsumon51:enPAmPa3oRxTsOCW@cluster0.nngte0p.mongodb.net/attendance?retryWrites=true&w=majority");
+
 
 // Start the server
 app.listen(port, () => {
