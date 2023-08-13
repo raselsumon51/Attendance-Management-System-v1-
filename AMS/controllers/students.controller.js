@@ -309,7 +309,8 @@ exports.uploadStudentInfo = async (req, res) => {
                     const newStudent = new Student1({
                         student_roll: student.student_id,
                         name: student.student_name,
-                        email: student.student_email
+                        email: student.student_email,
+                        password:123456
                     });
                     await newStudent.save();
                     console.log('Student Saved');
