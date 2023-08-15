@@ -51,12 +51,28 @@ app.use(function (req, res, next) {
     next();
 });
 
-// const logSessionData = (req, res, next) => {
-//     console.log('Session Data:', req.session);
-//     next(); // Call next() to pass control to the next middleware
-// };
+const logSessionData = (req, res, next) => {
+    console.log('Session Data: ', req.session);
+    next();
+};
 
-// app.use(logSessionData);
+app.use(logSessionData);
+
+// Global Error Handling Middleware
+app.use((err, req, res, next) => {
+    console.error(err); // Log the error for debugging purposes
+
+    // Determine the response status code
+    const statusCode = err.statusCode || 500;
+
+    // Send a response to the client
+    res.status(statusCode).json({
+        error: {
+            message: err.message || 'Internal Server Error',
+            path: req.path
+        }
+    });
+});
 
 // Routes
 app.use('/admin-dashboard', adminRoutes);

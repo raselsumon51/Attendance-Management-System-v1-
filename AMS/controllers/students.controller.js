@@ -413,12 +413,13 @@ exports.showCourseAttendance = async (req, res) => {
                 },
             },
         ]);
-        // console.log(results);
+        //  console.log(results);
         const studentIds = results.map(result => result._id);
         const students = await Student1.find({ _id: { $in: studentIds } });
 
         let populatedResults = results.map(result => {
             const student = students.find(student => student._id.equals(result._id));
+            // console.log(student);
             return {
                 _id: student._id,
                 name: student.name,
@@ -455,13 +456,19 @@ exports.showCourseAttendance = async (req, res) => {
             }
         });
 
+
+        //my marks
+        const attendancedata = output.filter(obj => obj._id.toString() === req.session.student_id.toString());
+        // const course_name = await Course1.findOne({ _id: course_id });
+
+
         const latestMark = await Mark.find({}).sort({ date: -1 });
 
         if (req.baseUrl == "/students-dashboard") {
-            res.render('student/attendance/list', { layout: './layouts/student', student_id: req.session.student_id, results: output, total_class, latestMark });
+            res.render('student/attendance/list', { layout: './layouts/student', student_id: req.session.student_id, results: attendancedata, total_class, latestMark });
         }
         else if (req.baseUrl == "/teacher") {
-            res.render('teacher/attendance-records/courses/attendance/list', { layout: './layouts/teacher-dashboard-layout', teacher_id: req.session.teacher_id, results: output, total_class, latestMark });
+            res.render('teacher/attendance-records/courses/attendance/list', { layout: './layouts/teacher-dashboard-layout', teacher_id: req.session.teacher_id, results: attendancedata, total_class, latestMark });
         }
     } catch (error) {
         console.error('Error executing the query:', error);

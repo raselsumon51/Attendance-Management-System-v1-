@@ -10,9 +10,12 @@ app.use(express.urlencoded({ extended: true }));
 
 
 router.get('/all', getAllStudents);
+
 router.get('/login', getLoginForm);
 router.post('/login', loginStudent);
 router.get('/logout', logoutStudent);
+
+
 router.get('/', getDashboard);
 
 
