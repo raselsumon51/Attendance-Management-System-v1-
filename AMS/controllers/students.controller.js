@@ -460,7 +460,7 @@ exports.showCourseAttendance = async (req, res) => {
         //my marks
         const attendancedata = output.filter(obj => obj._id.toString() === req.session.student_id.toString());
         // const course_name = await Course1.findOne({ _id: course_id });
-
+// 
 
         const latestMark = await Mark.find({}).sort({ date: -1 });
 
