@@ -35,6 +35,7 @@ router.post('/:id/update', studentAuthMiddleware, updateStudent)
 
 router.get('/students/:id/', studentAuthMiddleware, profile)
 
+// upload student by excel file
 router.post('/upload', uploadStudentInfo);
 
 router.get('/courses', studentAuthMiddleware, getAllCourses);

@@ -9,6 +9,7 @@ const router = express.Router();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
+// all attendance data
 router.get('/attendance/courses/:course_id', teacherAuthMiddleware, showCourseAttendance);
 
 // login GET | POST

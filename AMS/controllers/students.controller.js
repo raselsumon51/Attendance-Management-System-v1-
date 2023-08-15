@@ -85,7 +85,7 @@ exports.addStudentManually = async (req, res) => {
 
 exports.postCourseID = async (req, res) => {
     const course_id = req.body.course_id;
-    //console.log(course_id)
+    console.log(course_id)
     res.render('teacher/add-student/courses/students/add', { course_id, message: "", layout: './layouts/teacher-dashboard-layout', teacher_id: req.session.teacher_id });
 };
 
@@ -308,7 +308,8 @@ exports.uploadStudentInfo = async (req, res) => {
             const workbook = xlsx.readFile(filePath);
             const worksheet = workbook.Sheets[workbook.SheetNames[0]];
             const students = xlsx.utils.sheet_to_json(worksheet);
-
+            // console.log('student-- ')
+            // console.log(students);
             for (const student of students) {
                 let insertion_count = 0;
                 // Check if a student with the same student_id or student_email already exists
@@ -319,22 +320,44 @@ exports.uploadStudentInfo = async (req, res) => {
                 if (!(existingStudent.length > 0)) {
                     // If the student does not exist, save the new student data
                     const newStudent = new Student1({
-                        student_roll: student.student_id,
+                        student_id: student.student_id,
                         name: student.student_name,
                         email: student.student_email,
                         password:123456
                     });
                     await newStudent.save();
-                    console.log('Student Saved');
+                    // console.log('Student Saved');
+                    // console.log('new std-- ');
+                    // console.log(newStudent);
+                        
 
-                    const existingEnrollment = await Enrollment.find({ student_roll: student.student_id });
+
+                    // const existingEnrollment = await Enrollment.find({ student_id: existingStudent[0]._id, course_id: course_id });
+                    // if (existingEnrollment.length > 0) {
+                    //     console.log('The student is already enrolled in the course.');
+                    // }
+                    // else {
+                        // console.log('enrollment-- ')
+                        // console.log(newStudent._id);
+                        const enrollment = new Enrollment({ student_id: newStudent._id, course_id: course_id });
+                        // console.log(enrollment)
+                        await enrollment.save();
+                        // console.log("Enrolled");
+                   // }
+                }
+                else {
+                    const existingEnrollment = await Enrollment.find({ student_id: existingStudent[0]._id, course_id: course_id });
                     if (existingEnrollment.length > 0) {
                         console.log('The student is already enrolled in the course.');
                     }
                     else {
-                        const enrollment = new Enrollment({ student_id: newStudent._id, course_id: course_id });
+                        // console.log('existing student enrollment-- ')
+                        // console.log(existingStudent[0]._id);
+                        const enrollment = new Enrollment({ student_id: existingStudent[0]._id, course_id: course_id });
+                        // console.log(enrollment)
                         await enrollment.save();
-                        console.log("Enrolled");
+                        // console.log("existing student Enrolled");
+                    // console.log(`${student.student_email} is already exists`);
                     }
                 }
             }
