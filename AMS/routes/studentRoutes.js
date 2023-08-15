@@ -1,5 +1,5 @@
 const express = require('express');
-const { getRegistrationPage, postRegistrationData, saveEnrollData, editStudent, updateStudent, getAllStudents, getLoginForm, loginStudent, logoutStudent, getDashboard, profile, postCourseID, store_form_info, uploadStudentInfo, getAllCourses, showCourseAttendance, showAllCourses, addStudentManually } = require('../controllers/students.controller');
+const { getRegistrationPage, postRegistrationData, saveEnrollData, editStudent, updateStudent, getAllStudents, getLoginForm, loginStudent, logoutStudent, getDashboard, profile, postCourseID, store_form_info, uploadStudentInfo, getAllCourses, showCourseAttendance, showAllCourses, addStudentManually, getRegistrationManually } = require('../controllers/students.controller');
 const app = express();
 const router = express.Router();
 const studentAuthMiddleware = require('../middlewares/studentAuthMiddleware');
@@ -25,12 +25,14 @@ router.post('/store-form-data', store_form_info);
 router.get('/add-manually/:course_id', addStudentManually);
 
 //student registration
-router.get('/registration', getRegistrationPage)
+router.get('/registration', getRegistrationManually)
 router.post('/register', postRegistrationData)
 
 router.get('/enroll', saveEnrollData)
 router.get('/students/:id/edit', studentAuthMiddleware, editStudent)
 router.post('/:id/update', studentAuthMiddleware, updateStudent)
+
+
 router.get('/students/:id/', studentAuthMiddleware, profile)
 
 router.post('/upload', uploadStudentInfo);

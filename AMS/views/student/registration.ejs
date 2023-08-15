@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    </link>
+</head>
+
+<body style="background-color: #5e85f3;">
+    <div class="container my-4">
+        <div class="row  d-flex justify-content-center">
+            <div class="col-lg-6 login_style p-4 bg-white ">
+                <h4 class="mb-1 text-center">Sign Up</h4>
+                <hr>
+                <% if (message) { %>
+                    <p class="bg-primary text-white p-2 text-center rounded-1">
+                        <%= message %>
+                    </p>
+                    <% } %>
+                        <form action="/students-dashboard/register" method="post">
+                            <div class="mb-2">
+                                <label for="student_id" class="form-label">Student ID:</label>
+                                <input required type="number" class="form-control" id="student_id"
+                                    placeholder="Enter student ID" name="student_id">
+                            </div>
+                            <div class="mb-2">
+                                <label for="name" class="form-label">Name:</label>
+                                <input required type="text" class="form-control" id="name" placeholder="Enter name"
+                                    name="name">
+                            </div>
+                            <div class="mb-2">
+                                <label for="email" class="form-label">Email:</label>
+                                <input required type="email" class="form-control" id="email" placeholder="Enter email"
+                                    name="email">
+                            </div>
+                            <div class="mb-2">
+                                <label for="phn" class="form-label">Phone:</label>
+                                <input required type="number" class="form-control" id="phone"
+                                    placeholder="Enter phone number" name="phone">
+                            </div>
+                            <div class="mb-2">
+                                <label for="session" class="form-label">Session:</label>
+                                <input required type="text" class="form-control" id="session"
+                                    placeholder="Enter session" name="session">
+                            </div>
+                            <div class="mb-2">
+                                <label for="password" class="form-label">Password:</label>
+                                <input required type="password" class="form-control" id="password"
+                                    placeholder="Enter password" name="password">
+                            </div>
+                            <div class="mb-2">
+                                <label for="add" class="form-label">Address:</label>
+                                <textarea class="form-control" name="address" id="address" cols="5" rows="3"
+                                    placeholder="Enter address"></textarea>
+                            </div>
+                            <br>
+                            <div class="text-center mb-2">
+                                <button type="submit" class="btn btn-primary btn-block">Register</button>
+                            </div>
+                            <div class="login-student">
+                                <p class="text-center">Already have an account? <a href="/student/login">login</a></p>
+                            </div>
+                        </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

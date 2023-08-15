@@ -14,6 +14,17 @@ const Student1 = require('../models/Student1.model');
 const { Attendance } = require('../models/Attendance.model');
 const Mark = require('../models/Mark.model');
 
+
+
+exports.getRegistrationManually = async (req, res) => { 
+    try {
+        res.render('student/registration', { title: 'Home Page', message: "", layout: false });
+    } catch (error) {
+        console.log(error.message)
+    }
+}
+
+
 exports.getRegistrationPage = async (req, res) => {
     try {
         courses = await Course1.find({ teacher: req.session.teacher_id });
@@ -188,7 +199,7 @@ exports.postRegistrationData = async (req, res) => {
         })
         newStudent.save()
             .then(student => {
-                res.render('student/student-registration', { message: 'Registration Successful!', layout: './layouts/teacher-dashboard-layout', teacher_id: req.session.teacher_id })
+                res.render('student/registration', { message: 'Registration Successful!', layout: false, teacher_id: req.session.teacher_id })
             })
             .catch(err => {
                 console.error(err)
@@ -264,6 +275,7 @@ exports.updateStudent = async (req, res) => {
 exports.profile = async (req, res) => {
     try {
         const student = await Student1.findOne({ _id: req.params.id });
+        console.log(student);
         if (!student) {
             res.status(404).send('Student not found');
             return;

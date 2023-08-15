@@ -7,14 +7,25 @@
           </div>
           <div class="card-body">
             <form action="/student/<%= student._id %>/update" method="POST">
-              <img src="/uploads/<%= student.image %>" alt="hfdg">
+             <div class="my-3">
+              <img src="/uploads/<%= student.image %>" alt="Student image is not set">
+             </div>
               <div class="form-group">
-                <label for="student_id">Student ID:</label>
-                <p><%= student.student_id %></p>
+                <label for="student_id" class="pe-3"><b>Student ID:</b></label>
+               
+                <% if (student.student_id) { %>
+                <span >
+                  <%= student.student_id %>
+                </span>
+                
+                <%} else { %>
+                 Not set
+                <% } %>
+                
               </div>
               <div class="form-group">
-                <label for="name">Name:</label>
-                <p><%= student.name %></p>
+                <label for="name"><b>Name</b>:</label>
+                <span class="ps-3"><%= student.name %></span>
               </div>
             </form>
           </div>
