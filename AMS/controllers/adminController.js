@@ -76,7 +76,9 @@ exports.createTeacher = (req, res) => {
     let saved = false;
     res.render('admin/teachers/add_manually', {
         layout: './layouts/admin-dashboard-layout',
-        saved:saved
+        saved: saved,
+        success: false,
+        stylesheet:""
     });
 };
 

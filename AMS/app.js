@@ -14,7 +14,7 @@ const studentRoutes = require('./routes/studentRoutes');
 const attendanceRoutes = require('./routes/attendance');
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001; // Use environment variable for port
 const DATABASE_URL = process.env.DATABASE_URL;
 
 // Middleware and configurations
@@ -29,11 +29,9 @@ app.set('views', path.join(__dirname, 'views'));
 // Set a different layout as the default
 app.set('layout', 'layouts/layout');
 
-
 // Session configuration
 const store = new MongoStore({
-    // url: 'mongodb://127.0.0.1:27017/attendance',
-    url: "mongodb+srv://raselsumon51:enPAmPa3oRxTsOCW@cluster0.nngte0p.mongodb.net/attendance?retryWrites=true&w=majority",
+    url: DATABASE_URL, // Use the environment variable for the database URL
     ttl: 604800 // 7 days
 });
 
@@ -46,17 +44,11 @@ app.use(
         store: store
     })
 );
+
 app.use(function (req, res, next) {
     res.locals.session = req.session;
     next();
 });
-
-const logSessionData = (req, res, next) => {
-    console.log('Session Data: ', req.session);
-    next();
-};
-
-app.use(logSessionData);
 
 // Global Error Handling Middleware
 app.use((err, req, res, next) => {
@@ -87,11 +79,31 @@ app.get('/', function (req, res) {
 
 // Database connection
 mongoose.set('strictQuery', false);
-// mongoose.connect('mongodb://127.0.0.1:27017/attendance');
-mongoose.connect("mongodb+srv://raselsumon51:enPAmPa3oRxTsOCW@cluster0.nngte0p.mongodb.net/attendance?retryWrites=true&w=majority");
 
 
-// Start the server
-app.listen(port, () => {
-    console.log(`Express app listening on port http://localhost:${port}`);
-});
+// mongoose.connect(DATABASE_URL);
+
+
+const connectDB = async () => {
+    try {
+        const conn = await mongoose.connect(DATABASE_URL);
+        console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } catch (error) {
+        console.log(error);
+        process.exit(1);
+    }
+}
+//Connect to the database before listening
+connectDB().then(() => {
+    app.listen(port, () => {
+        console.log("listening for requests");
+    })
+})
+
+
+
+
+
+
+
+
