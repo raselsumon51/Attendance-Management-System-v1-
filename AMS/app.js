@@ -14,7 +14,7 @@ const studentRoutes = require('./routes/studentRoutes');
 const attendanceRoutes = require('./routes/attendance');
 
 const app = express();
-const port = process.env.PORT || 3001; // Use environment variable for port
+const port = process.env.PORT; // Use environment variable for port
 const DATABASE_URL = process.env.DATABASE_URL;
 
 // Middleware and configurations
@@ -79,10 +79,7 @@ app.get('/', function (req, res) {
 
 // Database connection
 mongoose.set('strictQuery', false);
-
-
 // mongoose.connect(DATABASE_URL);
-
 
 const connectDB = async () => {
     try {
@@ -96,7 +93,7 @@ const connectDB = async () => {
 //Connect to the database before listening
 connectDB().then(() => {
     app.listen(port, () => {
-        console.log("listening for requests");
+        console.log("Listening on 3001 port");
     })
 })
 
