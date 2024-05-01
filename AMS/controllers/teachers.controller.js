@@ -45,7 +45,7 @@ exports.saveUpdatedTeacher = async (req, res) => {
 //login GET
 exports.loginForm = (req, res) => {
     res.render('teacher/login', {
-        layout: false,
+         layout: './layouts/layout',
         message:""
     });
 };
@@ -67,12 +67,15 @@ exports.logout = (req, res) => {
 // 
 exports.login = async (req, res) => {
     try {
+        // console.log(req.body)
         const { email, pswd } = req.body;
         const teacher = await Teacher1.find({ email: email, password: pswd });
+        console.log(teacher)
+        req.session.teacher_email = email;
+        req.session.teacher_id = teacher[0]._id;
 
         if (teacher.length > 0) {
-            req.session.teacher_email = email;
-            req.session.teacher_id = teacher[0]._id;
+            
             res.redirect('/teacher/dashboard');
         } else {
             res.render('teacher/login', {

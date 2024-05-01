@@ -123,6 +123,7 @@ exports.getAllStudents = async (req, res) => {
     }
 };
 
+
 exports.getLoginForm = (req, res) => {
     res.render('student/login', {
         page: "",
@@ -130,9 +131,11 @@ exports.getLoginForm = (req, res) => {
     });
 };
 
+
 exports.loginStudent = async (req, res) => {
     try {
         let { email, pswd } = req.body;
+        
         const student = await Student1.find({ email: email, password: pswd });
 
         if (student.length != 0) {
