@@ -69,7 +69,7 @@ app.use("/students-dashboard", studentRoutes);
 
 // home page render
 app.get("/", function (req, res) {
-  res.render("Homepage/HomePage.ejs", { layout: './layouts/layout',  error_message : "" });
+  res.render("Homepage/Homepage.ejs", { layout: './layouts/layout',  error_message : "" });
 });
 
 app.post("/", async function (req, res) {
