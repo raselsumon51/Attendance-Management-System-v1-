@@ -132,23 +132,27 @@ exports.getLoginForm = (req, res) => {
 };
 
 
-exports.loginStudent = async (req, res) => {
-    try {
-        let { email, pswd } = req.body;
+// Sudent-Login POST
+// exports.loginStudent = async (req, res) => {
+//     try {
+//         let { email, pswd } = req.body;
         
-        const student = await Student1.find({ email: email, password: pswd });
+//         const student = await Student1.find({ email: email, password: pswd });
 
-        if (student.length != 0) {
-            req.session.student_email = email;
-            req.session.student_id = student[0]._id;
-            res.redirect('/students-dashboard');
-        } else {
-            res.send("Email and password are not matched or You are not a Student!");
-        }
-    } catch (error) {
-        console.log(error);
-    }
-};
+//         if (student.length != 0) {
+//             req.session.student_email = email;
+//             req.session.student_id = student[0]._id;
+//             res.redirect('/students-dashboard');
+//         } else {
+//             // res.send("Email and password are not matched or You are not a Student!");
+//             res.render('Homepage/Homepage',{
+//                 layout: './layouts/layout'
+//         });
+//         }
+//     } catch (error) {
+//         console.log(error);
+//     }
+// };
 
 exports.logoutStudent = (req, res) => {
     req.session.student_email = null;

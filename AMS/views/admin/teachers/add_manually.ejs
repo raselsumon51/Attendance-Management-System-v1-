@@ -1,26 +1,16 @@
-<style>
-    .custom-card {
-        padding-top: 100px;
-        padding-bottom: 100px;
-    }
-
-    .success {
-        width: 300px;
-    }
-</style>
 <div class="container">
-    <div class="row justify-content-center custom-card">
-        <div class="col-md-8">
+    <div class="row justify-content-center ">
+        <div class="col-md-8 card py-md-4 px-md-5">
             <div class="">
+                <% if (message) { %>
 
-                <% if (success) { %>
-
-                    <div class="alert alert-success alert-dismissible">
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                        <strong>Success!</strong> This alert box could indicate a successful or positive action.
-                    </div>
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= message %>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                      </div>
 
                     <% } %>
+
                         <h4 class="text-center mb-4 mt-4">Add Teacher using Form</h4>
                         <form action="/admin-dashboard/add-teacher" method="post">
                             <div class="">
@@ -42,25 +32,3 @@
     </div>
 </div>
 
-<script>
-    const closeButton = document.querySelector(".btn-close");
-    const successAlert = document.getElementById("success");
-
-    function closeSuccessMessage() {
-        let opacity = 1;
-
-        const animationInterval = setInterval(() => {
-            opacity -= 0.05; // Decrease opacity in small steps
-            successAlert.style.opacity = opacity;
-
-            if (opacity <= 0) {
-                successAlert.style.display = "none";
-                clearInterval(animationInterval); // Stop the animation
-            }
-        }, 30); // Adjust the duration as needed (20ms = 50fps)
-    }
-
-    closeButton.addEventListener("click", () => {
-        closeSuccessMessage();
-    });
-</script>

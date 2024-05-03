@@ -18,9 +18,10 @@ exports.getUser = async (req, res) => {
 }
 
 
-exports.getAdminLoginForm = (req, res) => {
+// admin login page GET
+exports.getAdminLoginForm = async (req, res) => {
     res.render('admin/login', {
-        layout: false,
+        layout: 'layouts/layout',
         message:""
     });
 };
@@ -34,7 +35,7 @@ exports.loginAdmin = async (req, res) => {
             res.redirect('/admin-dashboard');
         } else {
             res.render('admin/login', {
-                layout: false,
+                layout: 'layouts/layout',
                 message: "Email and Password didn't matched!"
             });
         }
@@ -44,6 +45,7 @@ exports.loginAdmin = async (req, res) => {
 };
 
 
+// Admin dashboard / (Home) route
 
 exports.getAdminDashboard = (req, res) => {
     if (!req.session.username) {
@@ -72,19 +74,24 @@ exports.logoutAdmin = (req, res) => {
 };
 
 
+// Create Teacher GET
 exports.createTeacher = (req, res) => {
     let saved = false;
     res.render('admin/teachers/add_manually', {
         layout: './layouts/admin-dashboard-layout',
-        saved: saved,
-        success: false,
-        stylesheet:""
+        // saved: saved,
+        // success: false,
+        // stylesheet:"",
+        message:""
     });
 };
 
+
+// Create Teacher POST
 exports.createNewTeacher = async (req, res) => {
     try {
         const existingTeacher = await Teacher1.findOne({ email: req.body.teacher_email });
+        
         if (existingTeacher) {
             res.status(409).send('Teacher already exists');
             return;
@@ -98,12 +105,12 @@ exports.createNewTeacher = async (req, res) => {
         await newTeacher.save();
         //console.log('New teacher saved to database:', newTeacher);
         //res.send("New Teacher Created");
-        const success = true;
+       
         res.render('admin/teachers/add_manually', {
             layout: './layouts/admin-dashboard-layout',
             message: "",
             stylesheet: "",
-            success
+            message:"Teacher added successfully"
         })
     } catch (err) {
         console.error('Error saving new teacher to database:', err);
@@ -189,6 +196,7 @@ exports.getCoursesAndTeachers = async (req, res) => {
 };
 
 
+// Get assign course teacher
 exports.addCourseTeacher = async (req, res) => {
     try {
         const courses = await Course1.find();
@@ -198,22 +206,40 @@ exports.addCourseTeacher = async (req, res) => {
             courses,
             teachers,
             layout: './layouts/admin-dashboard-layout',
-            stylesheet: ""
+            msg:""
+            // stylesheet: ""
         });
     } catch (error) {
         console.log(error);
     }
 };
 
+
+// POST assign course teacher
 exports.addTeacher = async (req, res) => {
     try {
         let course = await Course1.findById(req.body.course_id);
+        const courses = await Course1.find();
+        const teachers = await Teacher1.find();
         if (course.teacher) {
-            return res.status(400).send("The teacher is already assigned to the course");
+            res.render('admin/assign-course-teacher', {
+                courses,
+                teachers,
+                layout: './layouts/admin-dashboard-layout',
+                msg:"The teacher is already assigned to the course"
+            });
+
         }
-        course.teacher = req.body.teacher_id;
-        await course.save();
-        res.send("Teacher assigned to the course");
+       else{
+            course.teacher = req.body.teacher_id;
+            await course.save();
+            res.render('admin/assign-course-teacher', {
+            courses,
+            teachers,
+            layout: './layouts/admin-dashboard-layout',
+            msg:"Teacher is assigned to the course"
+        });
+       }
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal server error");

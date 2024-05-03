@@ -8,6 +8,11 @@ const fileUpload = require("express-fileupload");
 const bodyParser = require('body-parser');
 require("dotenv").config();
 
+
+// student1 model
+const Student1 = require('./models/Student1.model');
+
+
 //env variables
 const port = process.env.PORT; // Use environment variable for port
 const DATABASE_URL = process.env.DATABASE_URL;
@@ -64,7 +69,31 @@ app.use("/students-dashboard", studentRoutes);
 
 // home page render
 app.get("/", function (req, res) {
-  res.render("Homepage/homePage.ejs", { layout: './layouts/layout' });
+  res.render("Homepage/HomePage.ejs", { layout: './layouts/layout',  error_message : "" });
+});
+
+app.post("/", async function (req, res) {
+      
+  try {
+    let { email, pswd } = req.body;
+    
+    const student = await Student1.find({ email: email, password: pswd });
+
+    if (student.length != 0) {
+        req.session.student_email = email;
+        req.session.student_id = student[0]._id;
+        res.redirect('/students-dashboard');
+    } else {
+        // res.send("Email and password are not matched or You are not a Student!");
+        res.render('Homepage/Homepage',{
+            layout: './layouts/layout',
+            error_message : "Email and password did not match!"
+    });
+    }
+} catch (error) {
+    console.log(error);
+}
+ 
 });
 
 // Global Error Handling Middleware

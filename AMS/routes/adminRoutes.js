@@ -14,9 +14,13 @@ router.get('/', getAdminDashboard);
 router.get('/logout', logoutAdmin);
 
 
-//get and post login form
-router.get('/login', getAdminLoginForm);
-router.post('/login', loginAdmin);
+// //get and post login form
+// router.get('/login', getAdminLoginForm);
+// router.post('/login', loginAdmin);
+router.route('/login')
+    .get(getAdminLoginForm)
+    .post(loginAdmin);
+
 
 
 
@@ -46,9 +50,13 @@ router.get('/upload-teachers', adminAuthMiddleware, getUploadCourses);
 router.post('/teacher-upload', adminAuthMiddleware, uploadTeacherEmails);
 
 
-//add teachers manually
-router.get('/add-teacher', adminAuthMiddleware, createTeacher);
-router.post('/add-teacher', adminAuthMiddleware, createNewTeacher);
+// //add teachers manually
+// router.get('/add-teacher', adminAuthMiddleware, createTeacher);
+// router.post('/add-teacher', adminAuthMiddleware, createNewTeacher);
+router.route('/add-teacher')
+    .get(adminAuthMiddleware, createTeacher)
+    .post(adminAuthMiddleware, createNewTeacher);
+
 
 
 module.exports = router;

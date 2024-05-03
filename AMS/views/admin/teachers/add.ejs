@@ -1,19 +1,20 @@
-
-<div class="container mt-4">
-  <div class="row justify-content-center custom-card">
-    <div class="col-md-8">
+<div class="container ">
+  <div class="row justify-content-center ">
+    
+    <div class="col-md-8 card py-md-5 px-md-5">
       <div class="p-md-4">
         <div id="message" class="text-center">
-          <% if (saved) { %>
-            <div class="bg-white py-3" id="success">
-              <div class="text-center text-dark">
-                <span>Teachrs has been successfully added!</span>
-                <button style="color: wheat !important;;font-size: 15px; " type="button"
-                  class="btn-close btn-sm btn-primary pe-2" data-bs-dismiss="alert" aria-label="Close"></button>
+            <% if (saved) { %>
+              <div class="bg-white py-3" id="success">
+                <div class="text-center text-dark">
+                  <span>Teachrs has been successfully added!</span>
+                  <button style="color: wheat !important;;font-size: 15px; " type="button"
+                    class="btn-close btn-sm btn-primary pe-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
               </div>
-            </div>
-            <% } %>
+              <% } %>
         </div>
+        
         <h4 class="text-center mb-4 mt-4 d-none d-md-block">Upload Excel File</h4>
         <form action="/admin-dashboard/teacher-upload" method="post" enctype="multipart/form-data">
           <div class="mb-3">
@@ -31,25 +32,3 @@
 </div>
 </div>
 
-<script>
-  const closeButton = document.querySelector(".btn-close");
-  const successAlert = document.getElementById("success");
-
-  function closeSuccessMessage() {
-    let opacity = 1;
-
-    const animationInterval = setInterval(() => {
-      opacity -= 0.05;
-      successAlert.style.opacity = opacity;
-
-      if (opacity <= 0) {
-        successAlert.style.visibility = "hidden";
-        clearInterval(animationInterval);
-      }
-    }, 20);
-  }
-
-  closeButton.addEventListener("click", () => {
-    closeSuccessMessage();
-  });
-</script>
