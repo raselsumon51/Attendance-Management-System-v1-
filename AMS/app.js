@@ -69,7 +69,7 @@ app.use("/students-dashboard", studentRoutes);
 
 // home page render
 app.get("/", function (req, res) {
-  res.render("Homepage/Homepage.ejs", { layout: './layouts/layout',  error_message : "" });
+  res.render("home/index", { layout: './layouts/layout',  error_message : "" });
 });
 
 app.post("/", async function (req, res) {
@@ -85,7 +85,7 @@ app.post("/", async function (req, res) {
         res.redirect('/students-dashboard');
     } else {
         // res.send("Email and password are not matched or You are not a Student!");
-        res.render('Homepage/Homepage',{
+        res.render('home/index',{
             layout: './layouts/layout',
             error_message : "Email and password did not match!"
     });
