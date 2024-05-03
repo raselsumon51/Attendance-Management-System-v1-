@@ -109,7 +109,7 @@ app.use((err, req, res, next) => {
 });
 
 // Database connection
-mongoose.set("strictQuery", false);
+// mongoose.set("strictQuery", false);
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(DATABASE_URL);
