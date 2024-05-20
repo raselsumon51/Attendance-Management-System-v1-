@@ -6,12 +6,11 @@ const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
 const bodyParser = require('body-parser');
+const MongoStore = require('connect-mongo');
 require("dotenv").config();
-
 
 // student1 model
 const Student1 = require('./models/Student1.model');
-
 
 //env variables
 const port = process.env.PORT; // Use environment variable for port
@@ -32,26 +31,25 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.set("layout", "layouts/layout");
 
-
 //  Session configuration
 app.use(
   session({
     secret: "ljfkfkkrkririejdbc",
     resave: false,
     saveUninitialized: true,
-    cookie: { maxAge: 7 * 24 * 60 * 60 * 1000 }
+    cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 }, // 7 days
+    store: MongoStore.create({
+      mongoUrl: DATABASE_URL,
+      ttl: 14 * 24 * 60 * 60 // 14 days
+    })
   })
 );
-
 
 // Set session data to be available globally
 app.use(function (req, res, next) {
   res.locals.session = req.session;
   next();
 });
-
-
-
 
 //define routes
 const adminRoutes = require("./routes/adminRoutes");
@@ -69,31 +67,28 @@ app.use("/students-dashboard", studentRoutes);
 
 // home page render
 app.get("/", function (req, res) {
-  res.render("home/index", { layout: './layouts/layout',  error_message : "" });
+  res.render("home/index", { layout: './layouts/layout', error_message: "" });
 });
 
 app.post("/", async function (req, res) {
-      
   try {
     let { email, pswd } = req.body;
     
     const student = await Student1.find({ email: email, password: pswd });
 
     if (student.length != 0) {
-        req.session.student_email = email;
-        req.session.student_id = student[0]._id;
-        res.redirect('/students-dashboard');
+      req.session.student_email = email;
+      req.session.student_id = student[0]._id;
+      res.redirect('/students-dashboard');
     } else {
-        // res.send("Email and password are not matched or You are not a Student!");
-        res.render('home/index',{
-            layout: './layouts/layout',
-            error_message : "Email and password did not match!"
-    });
+      res.render('home/index', {
+        layout: './layouts/layout',
+        error_message: "Email and password did not match!"
+      });
     }
-} catch (error) {
+  } catch (error) {
     console.log(error);
-}
- 
+  }
 });
 
 // Global Error Handling Middleware
@@ -109,7 +104,6 @@ app.use((err, req, res, next) => {
 });
 
 // Database connection
-// mongoose.set("strictQuery", false);
 const connectDB = async () => {
   try {
     const conn = await mongoose.connect(DATABASE_URL);
@@ -120,9 +114,9 @@ const connectDB = async () => {
   }
 };
 
-//Connect to the database before listening
+// Connect to the database before listening
 connectDB().then(() => {
   app.listen(port, () => {
-    console.log("Listening on 3001 port");
+    console.log(`Listening on port ${port}`);
   });
 });

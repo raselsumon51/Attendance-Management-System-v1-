@@ -1,7 +1,16 @@
+<style>
+    @media (min-width: 992px) {
+    .vh-lg-80 {
+        height: 80vh;
+    }
+}
+
+</style>
+
 <body>
     <div class="container">
-        <div class="row justify-content-center align-items-center" style="height: 80vh;">
-            <div class="col-md-5 px-md-3 py-md-0 pe-md-5">
+        <div class="row justify-content-lg-center align-items-lg-center vh-lg-80" >
+            <div class="col-lg-5 px-lg-3 py-lg-0 pe-lg-5 py-4">
 
                 <% if (error_message) { %>
                     <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -11,8 +20,8 @@
                 <% } %>
                 
 
-                <div class="px-md-5 card py-md-3">
-                    <h5 class="mb-0 text-center pb-md-3" style="padding: 23px 0px;"> Student Log In (Click Login to Test)</h5>
+                <div class="px-lg-5 card py-lg-3 px-5">
+                    <h5 class="mb-0 text-center pb-lg-3" style="padding: 23px 0px;"> Student Log In (Click Login to Test)</h5>
                     <form action="/" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Email</label>
@@ -23,20 +32,21 @@
                             <input type="password" value="1234" class="form-control" placeholder="Enter your password" id="password" name="pswd">
                         </div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-info text-white">Login</button>
                         </div>
-                        <div class="mb-3 text-center">
+                        <div class="mb-lg-3 mb-3 text-center">
                             <a href="#" class="text-decoration-none">Forgot Password?</a>
                         </div>
                     </form>
-                    <div class="container text-end mt-4">
-                        <a href="/teacher/login" class="btn btn-info text-white">Login as Teacher</a>
+                    <div class="container text-end mt-lg-2 mb-3 mb-lg-0 d-flex justify-content-end">
+                        <a href="/teacher/login" class="btn btn-info text-white me-lg-3 me-3">Teacher Login</a>
+                        <a href="/admin-dashboard/login" class="btn btn-info text-white">Admin Login</a>
                     </div>
                 </div>
                 
             </div>
-            <div class="col-md-5 card py-md-3 ps-md-5">
-                <div class="py-md-3">
+            <div class="col-lg-5 card py-lg-3 ps-lg-5 mb-4">
+                <div class="py-lg-3 ">
                     <img src="./attendance.jpg" alt="Login Image" class="img-fluid">
                 </div>
             </div>

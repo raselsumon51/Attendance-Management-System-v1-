@@ -1,129 +1,77 @@
-<style>
-  a {
-    color: rgb(0, 0, 0);
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: rgb(0, 0, 0);
-  }
-
-  .red-border {
-    border: 8px solid red;
-  }
-
-  .green-border {
-    border: 8px solid green;
-  }
-</style>
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Take Attendance</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
 <body>
   <div class="container">
     <div class="row justify-content-center">
-      <div class="col-md-11  py-md-5" style="background-color: hsla(222, 44%, 13%, 1);
-    color: aliceblue;
-    border: 1px solid hsla(216, 33%, 20%, 1);
-    padding-left: 150px;
-    padding-right: 150px;">
+      <div class="col-md-11 py-md-5 bg-dark text-light border border-secondary px-5">
         <h4 class="text-center mb-5">Take Attendance</h4>
         <div id="myCarousel" class="carousel slide">
           <div class="carousel-inner">
-            <% enrolledStudents.forEach((student, index)=> { %>
-
-            <% let imageSrc; %>
-            <% if (student.student_id.image) { %>
-            <% imageSrc=student.student_id.image; %>
-            <% } else { %>
-            <% imageSrc="img1.png" ; %>
-            <% } %>
-
-
-            <% if (index==0) { %>
-            <div class="carousel-item active">
-              <img style="height: 300px;width: 250px; margin: auto;" onClick="myfunc('<%= student.student_id._id %>', '<%= course_id %>','<%= date %>')" id="<%= student.student_id._id %>" src="/uploads/<%= imageSrc %>" alt="Los Angeles" class="d-block" data-student-email="<%= student.student_id.email %>">
-              <h4 class="text-center mt-3">
-                <%= student.student_id.name %>
-              </h4>
-              <h4 class="text-center">
-                <%= student.student_id.email %>
-              </h4>
-            </div>
-
-            <% } else { %>
-            <div class="carousel-item">
-              <img style="height: 300px;width: 250px; margin: auto;" onClick="myfunc('<%= student.student_id._id %>', '<%= course_id %>','<%= date %>')" id="<%= student.student_id._id %>" src="/uploads/<%= imageSrc %>" alt="Los Angeles" class="d-block">
-              <h5 class="text-center mt-3">
-                <%= student.student_id.name %>
-              </h5>
-              <h5 class="text-center">
-                <%= student.student_id.email %>
-              </h5>
-            </div>
-            <% } %>
-
+            <% enrolledStudents.forEach((student, index) => { %>
+              <% let imageSrc = student.student_id.image || "img1.png"; %>
+              <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                <img class="d-block mx-auto" style="height: 300px; width: 250px;" onClick="myfunc('<%= student.student_id._id %>', '<%= course_id %>','<%= date %>')" id="<%= student.student_id._id %>" src="/uploads/<%= imageSrc %>" alt="Student Image" data-student-email="<%= student.student_id.email %>">
+                <h4 class="text-center mt-3">
+                  <%= student.student_id.name %>
+                </h4>
+                <h4 class="text-center">
+                  <%= student.student_id.email %>
+                </h4>
+              </div>
             <% }) %>
-
-
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Previous</span>
-            </button>
-
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="visually-hidden">Next</span>
-            </button>
           </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
         </div>
       </div>
     </div>
-</div>
+  </div>
 
-    <script>
-      function myfunc(student_id, course_id, date) {
-        const attendance_data = {
-          student_id,
-          course_id,
-          date
-        }
-        $.ajax({
-          url: '/attendance/insert',
-          method: 'POST',
-          data: {
-            attendance_data: attendance_data
-          },
-          success: function(data) {
-            //console.log(data.msg);
-            //console.log(student_id);
-            if (data.msg == "New Attendance Recorded") {
-              $('#' + student_id).removeClass('red-border');
-              $('#' + student_id).addClass('green-border');
-            } else {
-              $('#' + student_id).removeClass('green-border')
-              $('#' + student_id).addClass('red-border');
-            }
-            //$('#' + student_id).toggleClass('green-border red-border');
-          },
-          error: function(xhr, status, error) {
-            console.error(error);
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function myfunc(student_id, course_id, date) {
+      const attendance_data = { student_id, course_id, date };
+      $.ajax({
+        url: '/attendance/insert',
+        method: 'POST',
+        data: { attendance_data: attendance_data },
+        success: function(data) {
+          const studentImage = document.getElementById(student_id);
+          console.log(data.msg)
+          if (data.msg === "New Attendance Recorded") {
+            studentImage.style.border = "5px solid green"; 
+          } else {
+            studentImage.style.border = "5px solid red"; 
           }
-        });
+        },
+        error: function(xhr, status, error) {
+          console.error(error);
+        }
+      });
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.code === 'ArrowLeft') {
+        event.preventDefault();
+        document.querySelector('.carousel-control-prev').click();
+      } else if (event.code === 'ArrowRight') {
+        event.preventDefault();
+        document.querySelector('.carousel-control-next').click();
       }
-
-      var carousel = document.querySelector('#myCarousel');
-      document.addEventListener('keydown', function(event) {
-        if (event.code == 'ArrowLeft') {
-          event.preventDefault();
-          carousel.querySelector('.carousel-control-prev').click();
-        }
-      });
-      document.addEventListener('keydown', function(event) {
-        if (event.code == 'ArrowRight') {
-          event.preventDefault();
-          carousel.querySelector('.carousel-control-next').click();
-        }
-      });
-    </script>
-
-
+    });
+  </script>
 </body>
+</html>

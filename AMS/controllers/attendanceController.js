@@ -43,51 +43,40 @@ exports.takeAttendance = async (req, res) => {
     }
 };
 
+// const Attendance = require('./models/Attendance'); // Adjust the path as necessary
+
 exports.insertAttendance = async (req, res) => {
+    const studentId = req.body['attendance_data[student_id]'];
+    const courseId = req.body['attendance_data[course_id]'];
+    const date = req.body['attendance_data[date]'];
 
-    // let today = new Date();
-    // const formattedToday = today.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' });
-
-    // const month = today.getMonth() + 1;
-    // const day = today.getDate();
-    // const year = today.getFullYear();
-
-    // const formattedDate = `${month}/${day}/${year}`;
-    // console.log(req.body.attendance_data.date);
-
-    //convert the form date to dd/mm/yy
-    const date = new Date(req.body.attendance_data.date);
-    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${String(date.getFullYear()).slice(-2)}`;
-    ///console.log(formattedDate);
-
-
-
-    // const today = new Date();
-    // const options = { day: '2-digit', month: '2-digit', year: '2-digit' };
-    // const formattedDate = today.toLocaleDateString('en-GB', options);
+    console.log(`student id : ${studentId} courseid ${courseId} date ${date}`)
+    
+    const formattedDate = new Date(date);
+    const formattedDateString = `${formattedDate.getDate()}/${formattedDate.getMonth() + 1}/${String(formattedDate.getFullYear()).slice(-2)}`;
 
     try {
-        const attendance = await Attendance.findOne({
+        const existingAttendance = await Attendance.findOne({
             attendance_value: true,
-            student: req.body.attendance_data.student_id,
-            course: req.body.attendance_data.course_id,
-            attendance_date: formattedDate
+            student: studentId,
+            course: courseId,
+            attendance_date: formattedDateString
         });
 
-        if (attendance) {
+        if (existingAttendance) {
             await Attendance.deleteOne({
                 attendance_value: true,
-                student: req.body.attendance_data.student_id,
-                course: req.body.attendance_data.course_id,
-                attendance_date: formattedDate
+                student: studentId,
+                course: courseId,
+                attendance_date: formattedDateString
             });
             res.json({ msg: "Attendance deleted" });
         } else {
             const newAttendance = new Attendance({
                 attendance_value: true,
-                student: req.body.attendance_data.student_id,
-                course: req.body.attendance_data.course_id,
-                attendance_date: formattedDate
+                student: studentId,
+                course: courseId,
+                attendance_date: formattedDateString
             });
 
             await newAttendance.save();
@@ -95,8 +84,15 @@ exports.insertAttendance = async (req, res) => {
         }
     } catch (err) {
         console.error(err);
+        res.status(500).json({ msg: "Server error", error: err.message });
     }
 };
+
+// module.exports = { insertAttendance };
+
+
+// module.exports = { insertAttendance };
+
 
 exports.sliderAttendance = async (req, res) => {
     const { course_id, date } = req.body;

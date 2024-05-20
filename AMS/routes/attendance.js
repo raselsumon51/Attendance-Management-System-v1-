@@ -8,9 +8,11 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
 
 // Route: /teacher/take
-router.get('/select-course', teacherAuthMiddleware,takeAttendance);
+// teacherAuthMiddleware
+router.get('/select-course',takeAttendance);
 // Route: /teacher/insert
-router.post('/insert', teacherAuthMiddleware, insertAttendance);
+//  teacherAuthMiddleware,
+router.post('/insert', insertAttendance);
 // Route: /teacher/slider
 router.post('/slider', teacherAuthMiddleware, sliderAttendance);
 
