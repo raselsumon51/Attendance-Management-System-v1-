@@ -117,6 +117,6 @@ const connectDB = async () => {
 // Connect to the database before listening
 connectDB().then(() => {
   app.listen(port, () => {
-    console.log(`Listening on port ${port}`);
+    console.log(`http://localhost:${port}`);
   });
 });

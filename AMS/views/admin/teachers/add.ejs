@@ -1,13 +1,14 @@
 <style>
-  .upload-teacher-xl{
+@media only screen and (min-width: 992px) {
+    .upload-teacher-xl{
     height: 91vh;
+    }
   }
-
 </style>
 
-<div class="container d-flex align-items-center justify-content-center upload-teacher-xl">
-  <div class="col-md-8  py-md-4 px-md-5 mt-lg-0 pb-2 py-4">
-    <div class="p-md-4">
+<div class="container d-flex align-items-center justify-content-center upload-teacher-xl mb-md-0 mb-3">
+  <div class="col-md-8  py-md-4 px-md-5 mt-lg-0 pb-2 py-5">
+    <div class="p-md-4 mb-md-0 mb-3">
       <div id="message" class="text-center">
         <% if (saved) { %>
           <div class="bg-white py-3" id="success">
@@ -20,10 +21,10 @@
         <% } %>
       </div>
       
-      <h3 class="text-center py-md-0 pb-md-2 pt-3 pb-2">Upload Excel File</h3>
+      <h4 class="text-center py-md-0 pb-md-2 pt-3 pb-md-4 pb-4 mb-md-0">Upload Excel File</h4>
       <form action="/admin-dashboard/teacher-upload" method="post" enctype="multipart/form-data">
         <div class="mb-3">
-          <label for="course_file" class="form-label mb-md-3 ">Select an Excel File</label>
+          <label for="course_file" class="form-label mb-md-3 mb-3">Select an Excel File</label>
           <input type="file" class="form-control" id="course_file" name="teacher_file" accept=".xlsx,.xls" required>
         </div>
         <div class="d-flex justify-content-center">

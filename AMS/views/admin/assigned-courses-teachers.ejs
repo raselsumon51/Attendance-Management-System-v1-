@@ -1,17 +1,24 @@
 <style>
-  .teacher-assigned-courses{
+  /* .teacher-assigned-courses{
+    height: 84vh;
+    overflow-y:scroll ;
+  } */
+  @media only screen and (min-width: 992px) {
+    .teacher-assigned-courses{
     height: 84vh;
     overflow-y:scroll ;
   }
 
+ 
+}
 
 </style>
 
 
 <div class="container ">
   <div class="row justify-content-center teacher-assigned-courses">
-    <div class="col-md-8   mt-lg-0 pb-2 mt-lg-3" >
-      <div class="p-md-4">
+    <div class="col-lg-8 col-12  mt-lg-0 pb-2 mt-lg-3" >
+      <div class="p-md-4 teacher-assigned-courses-content" style="overflow: auto;">
         <h5 class="mt-3 mb-4 text-center">Teachers and Assigned Courses</h5>
 
             <table class="table table-bordered " style="color: aliceblue; ">
