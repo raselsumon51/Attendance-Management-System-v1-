@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const expressLayouts = require("express-ejs-layouts");
 const fileUpload = require("express-fileupload");
 const bodyParser = require('body-parser');
-const MongoStore = require('connect-mongo');
+// const MongoStore = require('connect-mongo');
 require("dotenv").config();
 
 // student1 model
@@ -38,10 +38,10 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: { maxAge: 14 * 24 * 60 * 60 * 1000 }, // 7 days
-    store: MongoStore.create({
-      mongoUrl: DATABASE_URL,
-      ttl: 14 * 24 * 60 * 60 // 14 days
-    })
+    // store: MongoStore.create({
+    //   mongoUrl: DATABASE_URL,
+    //   ttl: 14 * 24 * 60 * 60 // 14 days
+    // })
   })
 );
 
